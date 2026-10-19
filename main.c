@@ -22,11 +22,10 @@ int main(){
         printf("0. Salir\n");
         printf("Ingresa tu opcion: ");
         
-        // Se corrigió el doble scanf que tenías antes
         if (scanf("%d", &opcion) != 1) {
             printf("Entrada no válida. Por favor, ingresa un número.\n");
             while (getchar() != '\n'); // Limpia el buffer de entrada
-            opcion = -1; // Asigna un valor incorrecto para que vuelva a pedir la opción
+            opcion = -1;
             continue;
         }
 
@@ -43,7 +42,7 @@ int main(){
             } else {
                 printf("Se ha alcanzado el límite de lecturas.\n");
             }
-        } else if (opcion == 2) { // Corregido: Se quitó la llave extra
+        } else if (opcion == 2) {
             // lecturas y estadísticas
             printf("Mostrando lecturas y estadísticas...\n");
             if (contador == 0) {
@@ -53,25 +52,25 @@ int main(){
                     printf("Lectura %d: %.2f\n", i + 1, lecturas[i]);
                 }
             }
-        } else if (opcion == 3) { // Corregido: Se cambió 'else' por 'else if'
+        } else if (opcion == 3) { 
             printf("Ver registro de eventos/alertas...\n");
             // registro de eventos/alertas
-        } else if (opcion == 4) { // Corregido: Se cambió 'else' por 'else if'
+        } else if (opcion == 4) { 
             printf("Enviando comando al actuador...\n");
             // enviar un comando al actuador
-        } else if (opcion == 5) { // Corregido: Se cambió 'else' por 'else if'
+        } else if (opcion == 5) { 
             printf("Deshaciendo último comando...\n");
             // deshacer el último comando
-        } else if (opcion == 6) { // Corregido: Se cambió 'else' por 'else if'
+        } else if (opcion == 6) { 
             printf("Generando reporte final...\n");
             // generar un reporte final
-        } else if (opcion == 0) { // Corregido: Se cambió 'else' por 'else if'
+        } else if (opcion == 0) {
             printf("Saliendo del programa...\n");
         } else {
             printf("Opción no válida. Por favor, intenta de nuevo.\n");
         }
 
-    } while (opcion != 0); // Corregido: El ciclo ahora cierra correctamente aquí abajo
+    } while (opcion != 0);
 
     free(lecturas);
     return 0;
