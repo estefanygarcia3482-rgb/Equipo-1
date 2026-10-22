@@ -48,9 +48,22 @@ int main(){
             if (contador == 0) {
                 printf("No hay lecturas registradas.\n");
             } else {
+                float suma = 0;
+                float max = lecturas[0];
+                float min = lecturas[0];
                 for (int i = 0; i < contador; i++){
-                    printf("Lectura %d: %.2f\n", i + 1, lecturas[i]);
+                    suma += lecturas[i];
+                    if (lecturas[i] > max) {
+                        max = lecturas[i];
+                    }
+                    if (lecturas[i] < min) {
+                        min = lecturas[i];
+                    }
                 }
+                printf("Estadísticas:\n");
+                printf("Promedio: %.2f\n", suma / contador);
+                printf("Máximo: %.2f\n", max);
+                printf("Mínimo: %.2f\n", min);
             }
         } else if (opcion == 3) { 
             printf("Ver registro de eventos/alertas...\n");
