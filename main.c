@@ -57,7 +57,6 @@ int main(){
                     printf("La lectura supera el umbral, wiu wiu.\n");
 
                     Grupo* nuevo_nodo = (Grupo*)malloc(sizeof(Grupo));
-                    // CORRECCIÓN 1: Debe ser != NULL para asegurarnos de que sí se creó
                     if (nuevo_nodo != NULL) { 
                         nuevo_nodo->eventos = (Evento*)malloc(sizeof(Evento));
                         if (nuevo_nodo->eventos != NULL) {
