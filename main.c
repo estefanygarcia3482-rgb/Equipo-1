@@ -41,7 +41,7 @@ int main(){
         
         if (scanf("%d", &opcion) != 1) {
             printf("Entrada no válida. Por favor, ingresa un número.\n");
-            while (getchar() != '\n'); // Limpia el buffer de entrada
+            while (getchar() != '\n');
             opcion = -1;
             continue;
         }
@@ -112,7 +112,7 @@ int main(){
                 printf("2. Buscar un evento por tipo de sensor.\n");
                 printf("3. Elimina un evento.\n");
                 printf("Ingresa tu opción: ");
-                scanf("%d", &op2); // Nota: usa %d en lugar de %D
+                scanf("%d", &op2);
 
                 if (op2 == 1) {
                     Grupo* actual = lista;
