@@ -119,7 +119,8 @@ int main(){
                     int num = 1;
                     while (actual != NULL) {
                         for (int i = 0; i < actual->cantidad_eventos; i++){
-                            printf("Evento %d | Tipo de sensor: %s | Valor: %.2f | Tiempo simulado: %d\n", num++, actual->eventos[i].tipo_sensor, actual->eventos[i].valor, actual->eventos[i].tiempo_simulado);
+                            printf("Evento %d | Tipo de sensor: %s | Valor: %.2f | Tiempo simulado: %d\n", num++, actual->eventos[i].tipo_sensor,
+                                actual->eventos[i].valor, actual->eventos[i].tiempo_simulado);
                         }
                         actual = actual->siguiente;
                     }
@@ -133,7 +134,8 @@ int main(){
                     while (actual != NULL) {
                         for (int i = 0; i < actual->cantidad_eventos; i++) {
                             if (strcmp(actual->eventos[i].tipo_sensor, buscar_tipo) == 0) {
-                                printf("Encontrado :D Tipo: %s | Valor %.2f | Tiempo: %d\n", actual->eventos[i].tipo_sensor, actual->eventos[i].valor, actual->eventos[i].tiempo_simulado);
+                                printf("Encontrado :D Tipo: %s | Valor %.2f | Tiempo: %d\n", actual->eventos[i].tipo_sensor, actual->eventos[i].valor,
+                                    actual->eventos[i].tiempo_simulado);
                                 encontrado++;
                             }
                         }
