@@ -16,6 +16,71 @@ struct S_Grupo {
 };
 typedef struct S_Grupo Grupo;
 
+struct S_Comando {
+    char nombre[50];
+    struct S_Comando* siguiente;
+};
+typedef struct S_Comando Comando;
+
+Comando* frente = NULL;
+Comando* final = NULL;
+
+Comando* pila = NULL;
+
+void encolar(char nombre[]) {
+    Comando* nuevo = (Comando*)malloc(sizeof(Comando));
+
+    if (nuevo == NULL) {
+        printf("Error al asignar memoria.\n");
+        return;
+    }
+
+    strcpy(nuevo->nombre, nombre);
+    nuevo->siguiente = NULL;
+
+    if (frente == NULL) {
+        frente = nuevo;
+        final = nuevo;
+    } else {
+        final->siguiente = nuevo;
+        final = nuevo;
+    }
+
+    printf("Comando agregado a la cola.\n");
+}
+
+void ejecutarCola() {
+    while (frente != NULL) {
+        Comando* actual = frente;
+
+        frente = frente->siguiente;
+
+        if (frente == NULL) {
+            final = NULL;
+        }
+
+        printf("Ejecutando comando: %s\n", actual->nombre);
+
+        actual->siguiente = pila;
+        pila = actual;
+    }
+}
+
+void deshacerComando() {
+    if (pila == NULL) {
+        printf("No hay comandos para deshacer.\n");
+        return;
+    }
+
+    Comando* actual = pila;
+
+    printf("Deshaciendo comando: %s\n", actual->nombre);
+
+    pila = pila->siguiente;
+
+    free(actual);
+}
+
 
 int main(){
     int opcion;
@@ -176,19 +241,37 @@ int main(){
                     }
                 }
             }
-        } else if (opcion == 4) { 
+        
+        } else if (opcion == 4) {
+            char nombre_comando[50];
+
             printf("Enviando comando al actuador...\n");
-        } else if (opcion == 5) { 
+            printf("Ingresa el nombre del comando: ");
+            scanf("%49s", nombre_comando);
+
+            encolar(nombre_comando);
+            ejecutarCola();
+
+        } else if (opcion == 5) {
+
             printf("Deshaciendo último comando...\n");
-        } else if (opcion == 6) { 
+            deshacerComando();
+
+        } else if (opcion == 6) {
+
             printf("Generando reporte final...\n");
+
         } else if (opcion == 0) {
+
             printf("Saliendo del programa...\n");
+
         } else {
+
             printf("Opción no válida. Por favor, intenta de nuevo.\n");
         }
 
     } while (opcion != 0);
+
 
     Grupo* actual = lista;
     while (actual != NULL) {
@@ -197,7 +280,19 @@ int main(){
         free(actual);
         actual = siguiente_nodo;
     }
-    
     free(lecturas);
+
+     while (frente != NULL) {
+        Comando* siguiente = frente->siguiente;
+        free(frente);
+        frente = siguiente;
+    }
+
+     while (pila != NULL) {
+        Comando* siguiente = pila->siguiente;
+        free(pila);
+        pila = siguiente;
+    }
+
     return 0;
 }
