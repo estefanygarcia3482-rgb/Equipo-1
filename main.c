@@ -129,7 +129,7 @@ int main(){
                             printf("Dime de que tipo de sensor tienes.\n");
                             scanf("%s", nuevo_nodo->eventos[0].tipo_sensor);
                             nuevo_nodo->eventos[0].valor = *Lec;
-                            printf ("Ingresa el tiempo de tu simulación: \n");
+                            printf ("Ingresa el tiempo de tu simulación (minutos): \n");
                             scanf("%d", &nuevo_nodo->eventos[0].tiempo_simulado);
                             nuevo_nodo->siguiente = lista;
                             lista = nuevo_nodo;
