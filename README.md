@@ -1,9 +1,9 @@
 # Equipo-1
 Para el proyecto de estructura de datos.
 Los te de manzanilla
-Lizeth Yoselyn Gonzalez Ruiz
-Diana Lisette Becerra Muñiz
-Estefany Monserrat Garcia Olmos
+Lizeth Yoselyn Gonzalez Ruiz 325034805
+Diana Lisette Becerra Muñiz 325035054
+Estefany Monserrat Garcia Olmos 325034821
 3B, Ingieneria en electronica y computación
 
 
