@@ -84,6 +84,9 @@ void deshacerComando() {
 
 int main(){
     int opcion;
+    int intentos_invalidos = 0;
+    int primis = 1;
+    int salida = 0;
     float* lecturas = (float*)malloc(100 * sizeof(float));
     if (lecturas == NULL) {
         printf("Error al asignar memoria.\n");
@@ -94,6 +97,17 @@ int main(){
     Grupo* lista = NULL;
 
     do {
+        if (!primis){
+            char respuesta[10];
+            printf("¿Deseas realizar otra operación? (s/n): \n");
+            scanf("%s", respuesta);
+            if (strcmp(respuesta, "n") == 0 || strcmp(respuesta, "N") == 0 || strcmp (respuesta, "no") == 0 || strcmp(respuesta, "NO") == 0) {
+                printf("Generando reporte final...\n");
+                salida = 1;
+                break;
+            }
+        }
+        primis = 0;
         printf("======Estación vigia======\n");
         printf("1. Captura lectura de sensor\n");
         printf("2. Mostrar lecturas y estadisticas\n");
@@ -105,10 +119,18 @@ int main(){
         printf("Ingresa tu opcion: ");
         
         if (scanf("%d", &opcion) != 1) {
+            intentos_invalidos++;
             printf("Entrada no válida. Por favor, ingresa un número.\n");
             while (getchar() != '\n');
-            opcion = -1;
+            if (intentos_invalidos >= 3){
+                printf("Haz superado el límite de 3 intentos inválidos. Cerrando el programa...\n");
+                printf("Generando reporte final...\n");
+                break;
+            }
             continue;
+        }
+        if (opcion >= 0 && opcion <= 6){
+            intentos_invalidos = 0;
         }
 
         if (opcion == 1) {
@@ -220,15 +242,23 @@ int main(){
 
                     while (actual != NULL) {
                         if (strcmp(actual->eventos[0].tipo_sensor, eliminar_tipo) == 0) {
-                            if (anterior == NULL){
-                                lista = actual->siguiente;
-                            } else {
-                                anterior->siguiente = actual->siguiente;
-                            }
+                            char confi[10];
+                            printf("¿Estas seguro de querer eliminar el evento del sensor '%s'? (s/n): ", eliminar_tipo);
+                            scanf("%s", confi);
+                            if (strcmp(confi, "s") != 0 && strcmp(confi, "S") != 0 || strcmp(confi, "si") != 0 && strcmp(confi, "SI") != 0){
+                                if (anterior == NULL){
+                                    lista = actual->siguiente;
+                                } else {
+                                    anterior->siguiente = actual->siguiente;
+                                }
                             free(actual->eventos);
                             free(actual);
                             eliminado = 1;
                             printf("Evento eliminado.\n");
+                            } else {
+                                printf("Eliminación cancelada.\n");
+                                eliminado = 1;
+                            }
                             break; 
                         }
                         
@@ -249,14 +279,27 @@ int main(){
             printf("Ingresa el nombre del comando: ");
             scanf("%49s", nombre_comando);
 
-            encolar(nombre_comando);
-            ejecutarCola();
-
+            if (strlen (nombre_comando) == 0){
+                printf("El nombre del comando no puede estar vacío.\n");
+            }else {
+                encolar(nombre_comando);
+                ejecutarCola();
+             }
         } else if (opcion == 5) {
 
             printf("Deshaciendo último comando...\n");
-            deshacerComando();
-
+            if (pila == NULL) {
+                printf("No hay comandos para deshacer.\n");
+            } else {
+                char confi[10];
+                printf("¿Estas seguro de querer deshacer el último comando ('%s')? (s/n): ", pila->nombre);
+                scanf("%s", confi);
+                if (strcmp(confi, "s") == 0 || strcmp(confi, "S") == 0 || strcmp(confi, "si") == 0 || strcmp(confi, "SI") == 0){
+                    deshacerComando();
+                } else {
+                    printf("Deshacer comando cancelado.\n");
+                }
+            }
         } else if (opcion == 6) {
 
             printf("Generando reporte final...\n");
@@ -266,11 +309,17 @@ int main(){
             printf("Saliendo del programa...\n");
 
         } else {
-
+            intentos_invalidos++;
             printf("Opción no válida. Por favor, intenta de nuevo.\n");
+
+            if (intentos_invalidos >= 3){
+                printf("Haz superado el límite de 3 intentos inválidos. Cerrando el programa...\n");
+                printf("Generando reporte final...\n");
+                break;
+            }
         }
 
-    } while (opcion != 0);
+    } while (!salida);
 
 
     Grupo* actual = lista;

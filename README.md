@@ -1,9 +1,9 @@
 # Equipo-1
 Para el proyecto de estructura de datos.
 Los te de manzanilla
-Lizeth Yoselyn Gonzalez Ruiz 325034805
-Diana Lisette Becerra Muñiz 325035054
-Estefany Monserrat Garcia Olmos 325034821
+Lizeth Yoselyn Gonzalez Ruiz 
+Diana Lisette Becerra Muñiz 
+Estefany Monserrat Garcia Olmos
 3B, Ingieneria en electronica y computación
 
 
@@ -48,7 +48,7 @@ Capturar una lectura normal:
 Capturar una lectura crítica (Alerta):
     Elige la opción 1 nuevamente.
     Ingresa un valor superior al umbral (por ejemplo: 65.0). El sistema detectará la anomalía (¡La lectura supera el umbral, wiu wiu!).
-    Introduce el tipo de sensor (ej: Temperatura) y el tiempo simulado (ej: 30).
+    Introduce el tipo de sensor (ej: Temperatura, Aceite, Ruedas o Voltaje) y el tiempo simulado (ej: 30).
 
 Ver estadísticas:
     Elige la opción 2 para visualizar el promedio, el valor máximo y el mínimo de las lecturas capturadas hasta el momento.
